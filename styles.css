@@ -111,8 +111,14 @@
 .footer-contacts{display:flex;align-items:center;gap:14px;font-family:"DM Mono",monospace;font-size:11px}
 .footer-contacts a{color:#6c6862;transition:color .2s}
 .footer-contacts a:hover{color:var(--ink)}
-.footer-sep{color:#b8b3ab;user-select:none}
 @media(max-width:700px){.contact-actions{gap:12px;flex-direction:column;align-items:stretch}.contact-button,.contact-phone{justify-content:center}.footer-contacts{flex-wrap:wrap;gap:8px}}
+
+/* Button Vector Arrow */
+.btn-arrow{display:inline-block;flex-shrink:0;vertical-align:middle;color:currentColor;transition:transform .22s cubic-bezier(.16,1,.3,1)}
+.nav-contact{display:inline-flex;align-items:center;gap:7px}
+.contact-button{align-items:center}
+.nav-contact:hover .btn-arrow,
+.contact-button:hover .btn-arrow{transform:translate(2px,-2px)}
 
 
 
