@@ -197,7 +197,7 @@ nav.bottom {
   }
 }
 
-/* 2-Phase Lens Defocus & Snap Back into Focus */
+/* 2-Phase Text Push-Inside with Blur & Snap Back (Midu Studio Effect) */
 @keyframes miduTextSnap {
   0% {
     filter: blur(0px);
@@ -205,8 +205,8 @@ nav.bottom {
     opacity: 1;
   }
   38% {
-    filter: blur(3.5px);
-    transform: scale(0.93);
+    filter: blur(3.8px);
+    transform: scale(0.90);
     opacity: 0.82;
   }
   100% {
@@ -226,16 +226,17 @@ nav.bottom {
   border-radius: 999px;
   color: var(--ink);
   text-decoration: none;
+  transform: none !important;
   transition: background 0.3s var(--ease-out-quint),
               border-color 0.3s var(--ease-out-quint),
-              box-shadow 0.3s var(--ease-out-quint),
-              transform 0.2s var(--ease-out-quint);
+              box-shadow 0.3s var(--ease-out-quint);
   user-select: none;
 }
 .nav-contact span {
   padding-left: 0 !important;
 }
 .nav-contact:hover {
+  transform: none !important;
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
@@ -244,10 +245,10 @@ nav.bottom {
   animation: miduStarPop 0.52s cubic-bezier(0.12, 0.23, 0.5, 1) forwards;
 }
 .nav-contact:hover .btn-text {
-  animation: miduTextSnap 0.52s cubic-bezier(0.44, 0, 0.56, 1) forwards;
+  animation: miduTextSnap 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .nav-contact:active {
-  transform: scale(0.96);
+  transform: scale(0.97) !important;
 }
 
 .contact-button {
@@ -262,24 +263,24 @@ nav.bottom {
   font-weight: 500;
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(241, 90, 41, 0.25);
+  transform: none !important;
   transition: background 0.3s var(--ease-out-quint),
-              transform 0.3s var(--ease-out-quint),
               box-shadow 0.3s var(--ease-out-quint);
   user-select: none;
 }
 .contact-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(241, 90, 41, 0.45);
+  transform: none !important;
+  box-shadow: 0 4px 18px rgba(241, 90, 41, 0.38) !important;
 }
 .contact-button:hover .btn-star-wrap {
   animation: miduStarPop 0.52s cubic-bezier(0.12, 0.23, 0.5, 1) forwards;
 }
 .contact-button:hover .btn-text {
-  animation: miduTextSnap 0.52s cubic-bezier(0.44, 0, 0.56, 1) forwards;
+  animation: miduTextSnap 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .contact-button:active {
-  transform: translateY(0) scale(0.97);
-  box-shadow: 0 4px 12px rgba(241, 90, 41, 0.3);
+  transform: scale(0.97) !important;
+  box-shadow: 0 2px 8px rgba(241, 90, 41, 0.3) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
