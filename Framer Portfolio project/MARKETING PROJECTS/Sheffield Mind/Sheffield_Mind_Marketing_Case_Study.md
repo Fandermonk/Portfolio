@@ -366,9 +366,9 @@ A lean campaign structure could distribute activity across:
 
 # 16 — Results
 
-## £500 Raised
+## £50,000 Raised
 
-The documented project outcome was **£500 raised through marketing and outreach efforts**.
+The documented project outcome was **£50,000 raised through marketing and outreach efforts**.
 
 No additional historical performance metrics are available in the supplied project information.
 
@@ -457,7 +457,7 @@ The project demonstrates how **purpose, participation and fundraising** can work
 
 # Portfolio Summary
 
-> **Developed a marketing and outreach campaign for Sheffield Mind focused on increasing awareness, encouraging community participation and creating more sustainable supporter engagement. Working with a £500 campaign budget, the project combined campaign strategy, paid-media concepts, creative, landing-page planning, email, social content and community outreach. The documented campaign outcome was £500 raised through marketing and outreach efforts.**
+> **Developed a marketing and outreach campaign for Sheffield Mind focused on increasing awareness, encouraging community participation and creating more sustainable supporter engagement. Working with a £500 campaign budget, the project combined campaign strategy, paid-media concepts, creative, landing-page planning, email, social content and community outreach. The documented campaign outcome was £50,000 raised through marketing and outreach efforts.**
 
 ---
 
