@@ -133,8 +133,9 @@ nav.bottom {
 
 /* Footer Social App Icons */
 .footer-socials{display:flex;align-items:center;gap:10px}
-.footer-icon{position:relative;width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#141416;border:none;color:#dedad2;box-shadow:0 2px 8px rgba(0,0,0,.3);text-decoration:none;transition:transform .24s cubic-bezier(.16,1,.3,1),box-shadow .24s cubic-bezier(.16,1,.3,1),color .2s,background .2s;will-change:transform}
-.footer-icon:hover{transform:translateY(-3px);background:#1e1e23;color:var(--orange);border:none;box-shadow:0 8px 18px rgba(0,0,0,.6)}
+.footer-icon{position:relative;width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#141416;border:none;color:#dedad2;box-shadow:0 2px 8px rgba(0,0,0,.3);text-decoration:none;transform:none;transition:box-shadow .24s cubic-bezier(.16,1,.3,1),color .2s,background .2s,transform .15s ease}
+.footer-icon:hover{transform:none;background:#1e1e23;color:var(--orange);border:none;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+.footer-icon:active{transform:scale(0.94)}
 .footer-icon svg{display:block;width:17px;height:17px;color:currentColor}
 @media(max-width:700px){footer{gap:16px;justify-content:center;text-align:center}.footer-socials{order:1;width:100%;justify-content:center}footer span{order:2}footer a[href="#top"]{order:3}}
 
