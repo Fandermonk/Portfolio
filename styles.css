@@ -87,25 +87,24 @@ main#top{padding-top:76px}
 /* Visual Explorations — Sticky Cards on Scroll */
 .lab{padding-bottom:120px}
 .experiments-stack{position:relative;display:flex;flex-direction:column;margin-top:44px;padding-bottom:60px}
-.exp-card{position:sticky;top:96px;margin-bottom:80px;background:var(--paper);color:#fff;border-radius:0;border:none;box-shadow:none;padding:0;cursor:pointer;transform-origin:center top;will-change:transform,filter;transition:transform .25s ease;outline:none}
+.exp-card{position:sticky;top:96px;margin-bottom:60px;background:transparent;color:#fff;border-radius:22px;border:none;box-shadow:none;padding:0;cursor:pointer;transform-origin:center top;will-change:transform,filter;transition:transform .25s ease;outline:none}
 .exp-card:last-child{margin-bottom:0}
 .exp-card:hover,.exp-card:focus-visible{border:none;box-shadow:none}
-.exp-card-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
-.exp-card-meta-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.exp-pill{font:11px/1.2 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.04em;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:#c5bfb6}
-.exp-card-title{margin:0;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:clamp(1.3rem,2.2vw,1.85rem);font-weight:600;letter-spacing:-.035em;color:#fff}
-.exp-card-action{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.1);color:#fff;font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.03em;transition:background .2s,transform .2s;flex-shrink:0}
+.exp-card-media{position:relative;width:100%;aspect-ratio:16/9;height:clamp(420px,50vw,680px);border-radius:22px;overflow:hidden;background:#0d0d0f;isolation:isolate;box-shadow:0 24px 60px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.08)}
+.exp-card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.exp-card:hover .exp-card-media img{transform:scale(1.03)}
+.exp-card-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.25) 24%,transparent 44%,rgba(0,0,0,.45) 66%,rgba(0,0,0,.92) 100%)}
+.exp-card-topline{position:absolute;z-index:2;top:24px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.exp-card-meta-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.exp-pill{font:11px/1.2 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.04em;padding:7px 12px;border-radius:999px;background:rgba(16,16,18,.76);color:#dedad2;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1)}
+.exp-card-action{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:rgba(16,16,18,.76);color:#fff;font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.03em;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);transition:background .2s,transform .2s,border-color .2s;flex-shrink:0}
 .exp-card-arrow{transition:transform .2s}
-.exp-card:hover .exp-card-action{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+.exp-card:hover .exp-card-action{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.25);transform:translateY(-2px)}
 .exp-card:hover .exp-card-arrow{transform:translate(2px,-2px)}
-.exp-card-media{position:relative;width:100%;aspect-ratio:16/9;max-height:540px;border-radius:16px;overflow:hidden;background:transparent}
-.exp-card-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s cubic-bezier(.16,1,.3,1)}
-.exp-card:hover .exp-card-media img{transform:scale(1.025)}
-.exp-card-scrim{position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,rgba(0,0,0,.5) 100%);pointer-events:none}
-.exp-card-badge{position:absolute;right:18px;bottom:18px;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(18,18,18,.85);color:#fff;font:11px "DM Mono",monospace;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.85;transition:opacity .2s,transform .2s}
-.exp-card:hover .exp-card-badge{opacity:1;transform:translateY(-2px)}
-.exp-card-footer{margin-top:16px}
-.exp-card-footer p{margin:0;font-size:15px;line-height:1.5;letter-spacing:-0.015em;color:rgba(255,255,255,.5);max-width:780px}
+.exp-card-bottomline{position:absolute;z-index:2;bottom:26px;left:26px;right:26px;max-width:840px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.exp-card:hover .exp-card-bottomline{transform:translateY(-4px)}
+.exp-card-title{margin:0 0 8px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:clamp(1.4rem,2.4vw,2.2rem);font-weight:600;letter-spacing:-.035em;line-height:1.15;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.exp-card-desc{margin:0;font-size:15px;line-height:1.5;letter-spacing:-0.015em;color:rgba(255,255,255,.84);max-width:740px;text-shadow:0 1px 8px rgba(0,0,0,.7)}
 
 /* Lightbox Preview Modal */
 .exp-lightbox{width:min(1380px,95vw);height:min(92vh,900px);max-height:94vh;margin:auto;padding:0;border:none;border-radius:22px;background:#111112;color:#fff;overflow:hidden;box-shadow:0 25px 70px rgba(0,0,0,.65)}
@@ -125,7 +124,7 @@ main#top{padding-top:76px}
 .lightbox-canvas img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 16px 40px rgba(0,0,0,.5)}
 .lightbox-caption{padding:16px 26px;background:#161618;border-top:none}
 .lightbox-caption p{margin:0;font-size:14px;line-height:1.5;color:#aaa49c}
-@media(max-width:700px){.lab{padding-bottom:70px}.experiments-stack{margin-top:28px}.exp-card{top:84px;margin-bottom:44px;padding:0;border-radius:0}.exp-card-header{align-items:flex-start;flex-direction:column;gap:10px}.exp-card-action{align-self:flex-start}.exp-card-media{aspect-ratio:4/3;max-height:360px}.exp-card-badge{display:none}.exp-card-footer p{font-size:13px}.exp-lightbox{width:100vw;height:100dvh;max-height:none;border-radius:0;border:none}.lightbox-header{padding:14px 16px}.lightbox-title{font-size:15px}.lightbox-caption{padding:12px 16px}.lightbox-caption p{font-size:13px}}
+@media(max-width:700px){.lab{padding-bottom:70px}.experiments-stack{margin-top:28px}.exp-card{top:84px;margin-bottom:34px;padding:0;border-radius:0}.exp-card-media{aspect-ratio:auto;height:clamp(460px,120vw,560px);border-radius:18px}.exp-card-topline{top:16px;left:16px;right:16px;gap:8px}.exp-card-bottomline{bottom:18px;left:16px;right:16px}.exp-card-title{font-size:1.35rem;margin-bottom:6px}.exp-card-desc{font-size:13px;line-height:1.45;color:rgba(255,255,255,.8)}.exp-pill{font-size:10px;padding:5px 9px}.exp-card-action{display:none}.exp-lightbox{width:100vw;height:100dvh;max-height:none;border-radius:0;border:none}.lightbox-header{padding:14px 16px}.lightbox-title{font-size:15px}.lightbox-caption{padding:12px 16px}.lightbox-caption p{font-size:13px}}
 
 /* Dialog & Lightbox Layering */
 dialog,
