@@ -280,13 +280,12 @@ nav.bottom {
   gap: 9px;
   padding: 10px 18px;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: none;
   border-radius: 14px;
   color: var(--ink);
   text-decoration: none;
   transform: none !important;
   transition: background 0.3s var(--ease-out-quint),
-              border-color 0.3s var(--ease-out-quint),
               box-shadow 0.3s var(--ease-out-quint);
   user-select: none;
 }
@@ -296,7 +295,6 @@ nav.bottom {
 .nav-contact:hover {
   transform: none !important;
   background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 .nav-contact:hover .btn-star-wrap {
@@ -884,7 +882,7 @@ html.reduced-motion .edge-blur-bottom {
   padding: 14px 28px;
   background: #202023;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   border-radius: 16px;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 15px;
@@ -893,7 +891,6 @@ html.reduced-motion .edge-blur-bottom {
   text-decoration: none;
   transform: none !important;
   transition: background 0.3s var(--ease-out-quint),
-              border-color 0.3s var(--ease-out-quint),
               box-shadow 0.3s var(--ease-out-quint);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   user-select: none;
@@ -901,7 +898,6 @@ html.reduced-motion .edge-blur-bottom {
 .case-pill-btn:hover {
   transform: none !important;
   background: #2d2d33;
-  border-color: rgba(255, 255, 255, 0.22);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
   color: #ffffff;
 }
