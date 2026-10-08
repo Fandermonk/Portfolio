@@ -422,6 +422,7 @@ nav.bottom {
   object-position: center;
   mix-blend-mode: normal;
   transform: scale(1);
+  transform-origin: center center;
   filter: saturate(1);
   transition: transform 0.75s var(--ease-out-quint) 0s,
               filter 0.65s var(--ease-out-quint) 0s;
@@ -469,29 +470,30 @@ nav.bottom {
   will-change: transform;
 }
 
-/* Hovered State (260ms Anti-Flicker Delay, Inward Scale-Down to 0.95, Silky Quintic Easing) */
-.project:hover .project-image img {
-  transform: scale(0.95);
+/* Hovered State (Increased 350ms Anti-Flicker Delay, Inward Scale-Down to 0.92, Silky Quintic Easing) */
+.project:hover .project-image img,
+.project-image:hover img {
+  transform: scale(0.92);
   filter: saturate(1.06);
-  transition: transform 0.8s var(--ease-out-quint) 0.26s,
-              filter 0.7s var(--ease-out-quint) 0.26s;
+  transition: transform 0.85s var(--ease-out-quint) 0.35s,
+              filter 0.75s var(--ease-out-quint) 0.35s;
 }
 
 .project:hover .project-meta {
   transform: translateY(-6px);
-  transition: transform 0.7s var(--ease-out-quint) 0.26s;
+  transition: transform 0.7s var(--ease-out-quint) 0.35s;
 }
 
 .project:hover h3 b {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  transition: opacity 0.5s var(--ease-out-quint) 0.26s,
-              transform 0.6s var(--ease-out-quint) 0.26s;
+  transition: opacity 0.5s var(--ease-out-quint) 0.35s,
+              transform 0.6s var(--ease-out-quint) 0.35s;
 }
 
 .project:hover h3 b svg {
   transform: translate3d(1px, -1px, 0);
-  transition: transform 0.6s var(--ease-out-quint) 0.26s;
+  transition: transform 0.6s var(--ease-out-quint) 0.35s;
 }
 
 
