@@ -805,15 +805,18 @@ html.reduced-motion .edge-blur-bottom {
 /* Dedicated Case Study Page Layout & Navigation Pills */
 .case-page-container {
   width: 100%;
-  padding-top: 76px;
+  padding: 96px clamp(16px, 3.5vw, 40px) 72px;
   background: var(--paper);
   min-height: calc(100vh - 80px);
+  box-sizing: border-box;
 }
 .case-page-sheet {
-  width: min(1180px, 100vw);
+  width: min(1180px, 100%);
   margin: 0 auto;
   background: #0c0c0e;
+  border-radius: 28px;
   overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 .case-page-sheet .case-hero {
   padding-top: 60px;
@@ -884,7 +887,10 @@ html.reduced-motion .edge-blur-bottom {
 
 @media (max-width: 700px) {
   .case-page-container {
-    padding-top: 64px;
+    padding: 76px 14px 48px;
+  }
+  .case-page-sheet {
+    border-radius: 20px;
   }
   .case-page-sheet .case-hero {
     padding-top: 40px;
