@@ -107,50 +107,6 @@ if(expStack){
   });
 }
 
-// Smooth Sticky Cards Stacking on Scroll
-let expScrollTicking=false;
-function updateStickyCards(){
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const cards=document.querySelectorAll('.exp-card');
-  if(!cards.length)return;
-  
-  for(let i=0;i<cards.length;i++){
-    const card=cards[i];
-    if(i===cards.length-1){
-      card.style.transform='scale(1)';
-      card.style.filter='brightness(1)';
-      continue;
-    }
-    const stickyTop=parseFloat(getComputedStyle(card).top)||96;
-    const cardHeight=card.offsetHeight||480;
-    let totalCompression=0;
-    for(let j=i+1;j<cards.length;j++){
-      const nextRect=cards[j].getBoundingClientRect();
-      if(nextRect.top>=stickyTop+cardHeight)break;
-      const progress=Math.max(0,Math.min(1,(stickyTop+cardHeight-nextRect.top)/cardHeight));
-      totalCompression+=progress;
-    }
-    const effectiveCompression=Math.min(totalCompression,2.5);
-    const scale=1-(effectiveCompression*0.035);
-    const brightness=1-(effectiveCompression*0.12);
-    card.style.transform=`scale(${scale})`;
-    card.style.filter=`brightness(${Math.max(0.62,brightness)})`;
-  }
-}
-
-window.addEventListener('scroll',()=>{
-  if(!expScrollTicking){
-    requestAnimationFrame(()=>{
-      updateStickyCards();
-      expScrollTicking=false;
-    });
-    expScrollTicking=true;
-  }
-},{passive:true});
-
-window.addEventListener('resize',()=>{updateStickyCards();},{passive:true});
-updateStickyCards();
-
 // Live India Time (IST) & Sun / Moon Celestial Transition
 const HERO_SUN_SVG = `<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.8" fill="currentColor" stroke="none"/><line x1="8" y1="1.2" x2="8" y2="2.8"/><line x1="8" y1="13.2" x2="8" y2="14.8"/><line x1="1.2" y1="8" x2="2.8" y2="8"/><line x1="13.2" y1="8" x2="14.8" y2="8"/><line x1="3.2" y1="3.2" x2="4.4" y2="4.4"/><line x1="11.6" y1="11.6" x2="12.8" y2="12.8"/><line x1="3.2" y1="12.8" x2="4.4" y2="11.6"/><line x1="11.6" y1="4.4" x2="12.8" y2="3.2"/></svg>`;
 
