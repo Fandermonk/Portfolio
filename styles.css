@@ -261,6 +261,19 @@ nav.bottom {
   }
 }
 
+/* 2-Phase Arrow Squash-and-Stretch Pop (Midu pagination icon effect) */
+@keyframes miduArrowPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.78);
+  }
+  100% {
+    transform: scale(1.16);
+  }
+}
+
 .nav-contact {
   display: inline-flex;
   align-items: center;
@@ -332,7 +345,9 @@ nav.bottom {
   .nav-contact:hover .btn-star-wrap,
   .contact-button:hover .btn-star-wrap,
   .nav-contact:hover .btn-text,
-  .contact-button:hover .btn-text {
+  .contact-button:hover .btn-text,
+  .case-pill-btn:hover span,
+  .case-pill-btn:hover svg {
     animation: none !important;
     filter: none !important;
     transform: none !important;
@@ -637,10 +652,13 @@ dialog .eyebrow,
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-/* Card Image Hover Scale */
+/* Card Image Hover Scale & Rounded Corners */
+.project,
 .project-image {
   overflow: hidden;
-  border-radius: 0;
+  border-radius: 28px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  transform: translateZ(0);
 }
 .exp-card-media {
   overflow: hidden;
@@ -866,26 +884,60 @@ html.reduced-motion .edge-blur-bottom {
   padding: 14px 28px;
   background: #202023;
   color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: -0.015em;
   text-decoration: none;
-  transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: none !important;
+  transition: background 0.3s var(--ease-out-quint),
+              border-color 0.3s var(--ease-out-quint),
+              box-shadow 0.3s var(--ease-out-quint);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  user-select: none;
 }
 .case-pill-btn:hover {
+  transform: none !important;
   background: #2d2d33;
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
   color: #ffffff;
+}
+.case-pill-btn:active {
+  transform: scale(0.97) !important;
+}
+.case-pill-btn span,
+.case-pill-btn .btn-text {
+  display: inline-block;
+  transform-origin: center center;
+  filter: blur(0px);
+  transform: scale(1);
+  transition: filter 0.4s var(--ease-out-quint),
+              transform 0.4s var(--ease-out-quint),
+              opacity 0.3s ease;
+  will-change: filter, transform;
+}
+.case-pill-btn:hover span,
+.case-pill-btn:hover .btn-text {
+  animation: miduTextSnap 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .case-pill-btn svg {
   display: block;
   flex-shrink: 0;
+  transform-origin: center center;
+  will-change: transform;
+}
+.case-pill-btn:hover svg {
+  animation: miduArrowPop 0.52s cubic-bezier(0.12, 0.23, 0.5, 1) forwards;
 }
 
 @media (max-width: 700px) {
+  .project,
+  .project-image {
+    border-radius: 20px;
+  }
   .case-page-container {
     padding: 76px 14px 48px;
   }
