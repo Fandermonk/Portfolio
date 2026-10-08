@@ -303,10 +303,10 @@ function initScrollAnimations() {
 
   document.querySelectorAll('.project').forEach((card, idx) => {
     card.dataset.animIndex = idx;
-    cardObserver.observe(card);
-    if (card.getBoundingClientRect().top < window.innerHeight * 0.85) {
+    if (window.innerWidth <= 768 || card.getBoundingClientRect().top < window.innerHeight * 0.95) {
       card.classList.add('in-view');
     }
+    cardObserver.observe(card);
   });
 
   document.querySelectorAll('.exp-card').forEach((card, idx) => {
