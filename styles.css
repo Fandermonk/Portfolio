@@ -801,3 +801,106 @@ html.reduced-motion .edge-blur-bottom {
     height: 80px;
   }
 }
+
+/* Dedicated Case Study Page Layout & Navigation Pills */
+.case-page-container {
+  width: 100%;
+  padding-top: 76px;
+  background: var(--paper);
+  min-height: calc(100vh - 80px);
+}
+.case-page-sheet {
+  width: min(1180px, 100vw);
+  margin: 0 auto;
+  background: #0c0c0e;
+  overflow: hidden;
+}
+.case-page-sheet .case-hero {
+  padding-top: 60px;
+}
+.nav-case-left {
+  display: flex;
+  align-items: center;
+}
+.nav-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 450;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.nav-back-link:hover {
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+.nav-back-link svg {
+  display: block;
+}
+
+/* Bottom Pagination Pills (matching user's capsule reference) */
+.case-nav-section {
+  padding: 60px 7.5% 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0c0c0e;
+  border-top: none;
+}
+.case-nav-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.case-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: #202023;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.case-pill-btn:hover {
+  background: #2d2d33;
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+.case-pill-btn svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .case-page-container {
+    padding-top: 64px;
+  }
+  .case-page-sheet .case-hero {
+    padding-top: 40px;
+  }
+  header.nav .nav-case-left {
+    display: flex !important;
+  }
+  .nav-back-link {
+    font-size: 13px;
+  }
+  .case-nav-section {
+    padding: 40px 24px 60px;
+  }
+  .case-pill-btn {
+    padding: 12px 22px;
+    font-size: 14px;
+    gap: 8px;
+  }
+}
