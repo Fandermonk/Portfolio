@@ -342,11 +342,52 @@ function initNavScroll() {
   onScroll();
 }
 
+// 5. Hero Parallax & Fade Controller
+function initHeroParallax() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  let ticking = false;
+  const onScroll = () => {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const vh = window.innerHeight;
+    const scrollRange = Math.max(1, vh - 76);
+    if (scrollY <= scrollRange * 1.3) {
+      const progress = Math.min(1, Math.max(0, scrollY / scrollRange));
+      const translateY = (progress * -40).toFixed(1);
+      const scale = (1 - progress * 0.04).toFixed(3);
+      const opacity = (1 - progress * 0.65).toFixed(3);
+      hero.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+      hero.style.opacity = opacity;
+      hero.style.pointerEvents = progress > 0.85 ? 'none' : 'auto';
+    } else {
+      if (hero.style.opacity !== '0') {
+        hero.style.opacity = '0';
+        hero.style.pointerEvents = 'none';
+      }
+    }
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+}
+
 // Run initializers
 initToolsMarquee();
 initHeroLineWipe();
 initScrollAnimations();
 initNavScroll();
+initHeroParallax();
 
 
 
