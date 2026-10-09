@@ -143,9 +143,9 @@ body.hero-animated .hero-editorial-title .line-mask:nth-child(2) .line-inner {
 /* Hero Bottom & Scroll Prompt */
 .hero-bottom {
   margin: 0;
-  padding-bottom: clamp(6px, 1.2vh, 14px);
+  padding-bottom: clamp(75px, 11vh, 110px);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   flex-shrink: 0;
@@ -154,6 +154,8 @@ body.hero-animated .hero-editorial-title .line-mask:nth-child(2) .line-inner {
   transition: opacity 1300ms cubic-bezier(0.16, 1, 0.3, 1),
               transform 1300ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+  position: relative;
+  z-index: 50;
 }
 body.hero-animated .hero-bottom {
   opacity: 1;
@@ -242,6 +244,10 @@ body.hero-animated .hero-bottom {
     width: 36px;
     height: 36px;
     border-radius: 10px;
+  }
+  .hero-bottom {
+    padding-bottom: clamp(55px, 8.5vh, 80px);
+    justify-content: flex-end;
   }
 }
 
@@ -599,7 +605,8 @@ nav.bottom {
   transition: transform var(--duration-fast) var(--ease-out-quint);
   will-change: transform, background-position;
   flex-shrink: 0;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: 0;
   margin-bottom: 2px;
 }
 .scroll-explore:hover {
