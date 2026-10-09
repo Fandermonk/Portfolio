@@ -19,12 +19,12 @@ main#top{padding-top:76px}
 .hero-eyebrow-wrap{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:0}
 .hero-eyebrow-wrap .eyebrow{margin:0}
 .eyebrow-sep{color:rgba(255,255,255,.28);font-size:13px;line-height:1;user-select:none}
-.hero-time{display:inline-flex;align-items:center;gap:8px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:500;color:#fff;letter-spacing:-.02em;line-height:1;user-select:none}
-.hero-time-icon{position:relative;display:inline-flex!important;align-items:center;justify-content:center;width:16px!important;height:16px!important;line-height:1!important;color:#fff!important;flex-shrink:0!important;transform-origin:50% 50%!important;will-change:transform}
+.hero-time{display:inline-flex;align-items:center;gap:7px;font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,.7);letter-spacing:-.01em;line-height:1;user-select:none}
+.hero-time-icon{position:relative;display:inline-flex!important;align-items:center;justify-content:center;width:14px!important;height:14px!important;line-height:1!important;color:rgba(255,255,255,.8)!important;flex-shrink:0!important;transform-origin:50% 50%!important;will-change:transform}
 .hero-time-icon.is-sun{-webkit-animation:spinClockwise 8s linear infinite!important;animation:spinClockwise 8s linear infinite!important}
 .hero-time-icon.is-moon{-webkit-animation:none!important;animation:none!important;transform:none!important}
-.hero-time-icon svg{display:block!important;width:15px!important;height:15px!important}
-.hero-time-val{font-weight:500;color:#fff}
+.hero-time-icon svg{display:block!important;width:13px!important;height:13px!important}
+.hero-time-val{font-weight:400;color:rgba(255,255,255,.7)}
 
 /* Sleeping Moon & Floating Zzz Animation */
 .hero-moon-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px}
@@ -36,15 +36,18 @@ main#top{padding-top:76px}
 .z-2{font-size:8px;right:2px;bottom:6px;animation:zFloat 2.4s ease-out .8s infinite}
 .z-3{font-size:9.5px;right:-2px;bottom:11px;animation:zFloat 2.4s ease-out 1.6s infinite}
 @keyframes zFloat{0%{opacity:0;transform:translate3d(0,2px,0) scale(.6)}20%{opacity:.95;transform:translate3d(1.5px,-2.5px,0) scale(.85)}55%{opacity:.75;transform:translate3d(3.5px,-7.5px,0) scale(1)}85%{opacity:.2;transform:translate3d(5.5px,-12px,0) scale(1.1)}100%{opacity:0;transform:translate3d(6.5px,-14px,0) scale(1.15)}}
-@media(max-width:700px){.hero-eyebrow-wrap{gap:7px}.hero-time{font-size:13px}.hero-time-icon{width:14px!important;height:14px!important}.hero-time-icon svg{width:13px!important;height:13px!important}}
+@media(max-width:700px){.hero-eyebrow-wrap{gap:6px}.hero-time{font-size:11.5px;font-weight:400}.hero-time-val{font-weight:400}.hero-time-icon{width:13px!important;height:13px!important}.hero-time-icon svg{width:12px!important;height:12px!important}}
 .content-sheet{position:relative;z-index:10;width:100%;background:var(--paper);box-shadow:none;border-top:none;padding-top:clamp(32px,5vh,56px)}
 @media(max-width:700px){.content-sheet{padding-top:20px}}
 @media(prefers-reduced-motion:reduce){.hero{position:relative!important;top:auto!important;transform:none!important;opacity:1!important}}
 
 /* Editorial Instrument Serif Hero with Inline Badges */
 .hero-eyebrow-wrap {
-  justify-content: center;
-  margin-inline: auto;
+  align-self: flex-start;
+  margin: 0;
+  margin-bottom: auto;
+  justify-content: flex-start;
+  padding-top: clamp(10px, 1.8vh, 22px);
 }
 .hero h1.hero-editorial-title,
 .hero-editorial-title {
@@ -55,7 +58,7 @@ main#top{padding-top:76px}
   font-weight: 400 !important;
   color: #fff;
   text-align: center;
-  margin: clamp(20px, 3vh, 32px) auto 0;
+  margin: auto auto;
   max-width: 960px;
 }
 .hero-editorial-title .hero-line {
