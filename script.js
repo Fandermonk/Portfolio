@@ -224,23 +224,20 @@ function initToolsMarquee() {
   });
 }
 
-// 2. Hero Headline Masked Line Wipe (on page load with deliberate calm pause)
-function initHeroLineWipe() {
-  const heroHeading = document.querySelector('.hero .masked-heading');
-  const heroEyebrow = document.querySelector('.hero .eyebrow');
-  
+// 2. Hero & Nav Cinematic Entrance Controller
+function initHeroEntrance() {
   const trigger = () => {
+    document.body.classList.add('hero-animated');
+    const heroEyebrow = document.querySelector('.hero .eyebrow');
     if (heroEyebrow) heroEyebrow.classList.add('in-view');
-    if (heroHeading) heroHeading.classList.add('in-view');
   };
 
-  // Wait 650ms after load so the visitor sees a still, calm page before the text gracefully glides up
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(trigger, 650);
+      setTimeout(trigger, 300);
     });
   } else {
-    setTimeout(trigger, 650);
+    setTimeout(trigger, 300);
   }
 }
 
@@ -384,7 +381,7 @@ function initHeroParallax() {
 
 // Run initializers
 initToolsMarquee();
-initHeroLineWipe();
+initHeroEntrance();
 initScrollAnimations();
 initNavScroll();
 initHeroParallax();

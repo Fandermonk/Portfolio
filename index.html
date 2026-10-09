@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=48" />
+    <link rel="stylesheet" href="styles.css?v=49" />
 
     <!-- Vercel Web Analytics -->
     <script>
@@ -32,7 +32,6 @@
     <header class="nav">
       <nav class="nav-left" aria-label="Main navigation">
         <a href="#work">Work</a>
-        <a href="#about">About</a>
       </nav>
       <div class="nav-brand">
         <a class="wordmark" href="#top">Arjun.</a>
@@ -44,7 +43,7 @@
 
     <main id="top">
       <section class="hero wrap">
-        <div class="hero-eyebrow-wrap reveal">
+        <div class="hero-eyebrow-wrap">
           <div class="hero-time" aria-label="Current time in India">
             <span class="hero-time-icon" id="hero-time-icon" aria-hidden="true">
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -63,24 +62,28 @@
           </div>
         </div>
 
-        <h1 class="hero-editorial-title reveal">
-          <span class="hero-line">
-            Hey, I’m
-            <span class="hero-badge hero-badge--avatar" aria-label="Arjun Rajeev portrait">
-              <img src="assets/images/arjun-badge.jpg?v=2" alt="Arjun Rajeev" />
+        <h1 class="hero-editorial-title">
+          <span class="line-mask">
+            <span class="line-inner hero-line">
+              Hey, I’m
+              <span class="hero-badge hero-badge--avatar" aria-label="Arjun Rajeev portrait">
+                <img src="assets/images/arjun-badge.jpg?v=2" alt="Arjun Rajeev" />
+              </span>
+              Arjun Rajeev
             </span>
-            Arjun Rajeev
           </span>
-          <span class="hero-line">
-            based in
-            <span class="hero-badge hero-badge--location" aria-label="India">
-              <img src="assets/images/india-badge.jpg" alt="India" />
+          <span class="line-mask">
+            <span class="line-inner hero-line">
+              based in
+              <span class="hero-badge hero-badge--location" aria-label="India">
+                <img src="assets/images/india-badge.jpg" alt="India" />
+              </span>
+              India
             </span>
-            India
           </span>
         </h1>
 
-        <div class="hero-bottom reveal">
+        <div class="hero-bottom">
           <a class="scroll-explore" href="#work" aria-label="Scroll to explore selected work">Scroll to explore ↓</a>
         </div>
       </section>
@@ -91,26 +94,13 @@
         <div id="projects" class="projects"></div>
       </section>
 
-      <section id="about" class="about wrap">
-        <div class="about-portrait"><img src="assets/images/profile.jpg?v=4" alt="Portrait of Arjun Rajeev" /></div>
-        <div class="about-copy">
-          <p class="eyebrow">02 / A little more</p>
-          <h2 class="masked-heading">
-            <span class="line-mask"><span class="line-inner">Strategy-minded.</span></span>
-            <span class="line-mask"><span class="line-inner"><em>Detail-obsessed.</em></span></span>
-          </h2>
-          <p><strong>I enjoy the point where a clear idea becomes a tangible experience.</strong> From a mobile flow that makes a difficult task feel simple to a campaign that carries one story across every touchpoint, I use design to help people move forward.</p>
-          <div class="capabilities"><span>UX / UI Design</span><span>Campaign Strategy</span><span>Digital Marketing</span><span>Content & CRM</span></div>
-        </div>
-      </section>
-
       <section id="explorations" class="lab wrap" aria-labelledby="lab-head">
-        <div class="section-head" id="lab-head"><p class="eyebrow">03 / Visual explorations</p><p><strong>Interface studies & spatial concepts</strong><br />and interactive experiments.</p></div>
+        <div class="section-head" id="lab-head"><p class="eyebrow">02 / Visual explorations</p><p><strong>Interface studies & spatial concepts</strong><br />and interactive experiments.</p></div>
         <div id="experiments-stack" class="experiments-stack"></div>
       </section>
 
       <section class="tools wrap" aria-labelledby="tools-title">
-        <div class="section-head"><p class="eyebrow">04 / The toolkit</p><p><strong>Software & platforms across</strong><br />product design, motion & growth.</p></div>
+        <div class="section-head"><p class="eyebrow">03 / The toolkit</p><p><strong>Software & platforms across</strong><br />product design, motion & growth.</p></div>
         <h2 id="tools-title">Tools for every<br /><em>part of the story.</em></h2>
         <div class="tools-marquee" aria-label="Design, marketing and creative tools">
           <div class="tools-row tools-row--1">
@@ -144,7 +134,7 @@
       </section>
 
       <section id="contact" class="contact wrap">
-        <p class="eyebrow">05 / Have a project in mind?</p>
+        <p class="eyebrow">04 / Have a project in mind?</p>
         <h2 class="masked-heading">
           <span class="line-mask"><span class="line-inner">Let’s make something</span></span>
           <span class="line-mask"><span class="line-inner"><em>worth noticing.</em></span></span>
@@ -209,6 +199,6 @@
         </div>
       </div>
     </dialog>
-    <script src="script.js?v=23"></script>
+    <script src="script.js?v=24"></script>
   </body>
 </html>
