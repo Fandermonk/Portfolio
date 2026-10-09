@@ -382,12 +382,59 @@ function initHeroParallax() {
   onScroll();
 }
 
+// 6. Hero Typewriter Effect
+function initHeroTypewriter() {
+  const el = document.getElementById('typewriter-text');
+  if (!el) return;
+
+  const words = [
+    'product designer',
+    'campaign strategist',
+    'creative director',
+    'UX / UI designer'
+  ];
+
+  let wordIndex = 0;
+  let charIndex = words[0].length;
+  let isDeleting = false;
+
+  setTimeout(() => {
+    tick();
+  }, 2000);
+
+  function tick() {
+    const currentWord = words[wordIndex];
+
+    if (isDeleting) {
+      charIndex--;
+      el.textContent = currentWord.substring(0, charIndex);
+    } else {
+      charIndex++;
+      el.textContent = currentWord.substring(0, charIndex);
+    }
+
+    let delta = isDeleting ? 38 : 78;
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      delta = 2200;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      delta = 420;
+    }
+
+    setTimeout(tick, delta);
+  }
+}
+
 // Run initializers
 initToolsMarquee();
 initHeroLineWipe();
 initScrollAnimations();
 initNavScroll();
 initHeroParallax();
+initHeroTypewriter();
 
 
 
