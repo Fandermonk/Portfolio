@@ -105,49 +105,7 @@ if(expStack){
   });
 }
 
-// Smooth Sticky Cards Stacking on Scroll
-let expScrollTicking=false;
-function updateStickyCards(){
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const cards=document.querySelectorAll('.exp-card');
-  if(!cards.length)return;
-  
-  for(let i=0;i<cards.length;i++){
-    const card=cards[i];
-    if(i===cards.length-1){
-      card.style.transform='scale(1)';
-      card.style.filter='brightness(1)';
-      continue;
-    }
-    const stickyTop=parseFloat(getComputedStyle(card).top)||96;
-    const cardHeight=card.offsetHeight||480;
-    let totalCompression=0;
-    for(let j=i+1;j<cards.length;j++){
-      const nextRect=cards[j].getBoundingClientRect();
-      if(nextRect.top>=stickyTop+cardHeight)break;
-      const progress=Math.max(0,Math.min(1,(stickyTop+cardHeight-nextRect.top)/cardHeight));
-      totalCompression+=progress;
-    }
-    const effectiveCompression=Math.min(totalCompression,2.5);
-    const scale=1-(effectiveCompression*0.035);
-    const brightness=1-(effectiveCompression*0.12);
-    card.style.transform=`scale(${scale})`;
-    card.style.filter=`brightness(${Math.max(0.62,brightness)})`;
-  }
-}
 
-window.addEventListener('scroll',()=>{
-  if(!expScrollTicking){
-    requestAnimationFrame(()=>{
-      updateStickyCards();
-      expScrollTicking=false;
-    });
-    expScrollTicking=true;
-  }
-},{passive:true});
-
-window.addEventListener('resize',()=>{updateStickyCards();},{passive:true});
-updateStickyCards();
 
 // Live India Time (IST) & Sun / Moon Celestial Transition
 const HERO_SUN_SVG = `<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.8" fill="currentColor" stroke="none"/><line x1="8" y1="1.2" x2="8" y2="2.8"/><line x1="8" y1="13.2" x2="8" y2="14.8"/><line x1="1.2" y1="8" x2="2.8" y2="8"/><line x1="13.2" y1="8" x2="14.8" y2="8"/><line x1="3.2" y1="3.2" x2="4.4" y2="4.4"/><line x1="11.6" y1="11.6" x2="12.8" y2="12.8"/><line x1="3.2" y1="12.8" x2="4.4" y2="11.6"/><line x1="11.6" y1="4.4" x2="12.8" y2="3.2"/></svg>`;
@@ -230,6 +188,11 @@ function initHeroEntrance() {
     document.body.classList.add('hero-animated');
     const heroEyebrow = document.querySelector('.hero .eyebrow');
     if (heroEyebrow) heroEyebrow.classList.add('in-view');
+
+    // Unlock overflow once initial masked entrance finishes so hover bubbles and tooltips are never cut off
+    setTimeout(() => {
+      document.body.classList.add('hero-revealed');
+    }, 1800);
   };
 
   if (document.readyState === 'loading') {
@@ -305,14 +268,6 @@ function initScrollAnimations() {
     }
     cardObserver.observe(card);
   });
-
-  document.querySelectorAll('.exp-card').forEach((card, idx) => {
-    card.dataset.animIndex = idx;
-    cardObserver.observe(card);
-    if (card.getBoundingClientRect().top < window.innerHeight * 0.85) {
-      card.classList.add('in-view');
-    }
-  });
 }
 
 // 4. Sticky Nav Scroll Shrink with Glassmorphic Blur
@@ -379,12 +334,89 @@ function initHeroParallax() {
   onScroll();
 }
 
+// 6. Visual Explorations — Butter-Smooth Sticky Card Stacking (60/120fps)
+function initStickyCards() {
+  const cards = document.querySelectorAll('.exp-card');
+  if (!cards.length) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  let ticking = false;
+
+  const update = () => {
+    const isMobile = window.innerWidth <= 700;
+    const stickyTop = isMobile ? 84 : 96;
+    const n = cards.length;
+    
+    // Single batch read of getBoundingClientRect() to avoid layout thrashing
+    const rects = new Array(n);
+    for (let i = 0; i < n; i++) {
+      rects[i] = cards[i].getBoundingClientRect();
+    }
+
+    // Mathematical compression computation
+    for (let i = 0; i < n; i++) {
+      const media = cards[i].querySelector('.exp-card-media');
+      if (!media) continue;
+
+      // The topmost / last card never scales down
+      if (i === n - 1) {
+        media.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        media.style.filter = 'brightness(1)';
+        continue;
+      }
+
+      const cardHeight = rects[i].height || 480;
+      let compression = 0;
+
+      for (let j = i + 1; j < n; j++) {
+        const nextTop = rects[j].top;
+        if (nextTop >= stickyTop + cardHeight) {
+          // Cards further down haven't reached card i yet
+          break;
+        }
+        const factor = Math.max(0, Math.min(1, (stickyTop + cardHeight - nextTop) / cardHeight));
+        compression += factor;
+      }
+
+      if (compression === 0) {
+        media.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        media.style.filter = 'brightness(1)';
+      } else {
+        const effectiveComp = Math.min(compression, 2.8);
+        const scale = 1 - (effectiveComp * 0.038);
+        const brightness = Math.max(0.68, 1 - (effectiveComp * 0.12));
+
+        media.style.transform = `translate3d(0, 0, 0) scale(${scale.toFixed(4)})`;
+        media.style.filter = `brightness(${brightness.toFixed(3)})`;
+      }
+    }
+
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { requestAnimationFrame(update); }, { passive: true });
+  
+  // Initial calculation
+  requestAnimationFrame(update);
+}
+
 // Run initializers
 initToolsMarquee();
 initHeroEntrance();
 initScrollAnimations();
 initNavScroll();
 initHeroParallax();
+initStickyCards();
 
 
 
