@@ -334,63 +334,89 @@ function initHeroParallax() {
   onScroll();
 }
 
-// 6. Visual Explorations — Butter-Smooth Sticky Card Stacking (60/120fps)
+// 6. Visual Explorations — Ultra-Smooth Sticky Stacking (Zero Forced Reflows, Occlusion Culled)
 function initStickyCards() {
+  const stack = document.querySelector('#experiments-stack');
   const cards = document.querySelectorAll('.exp-card');
-  if (!cards.length) return;
+  if (!stack || !cards.length) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
+  const n = cards.length;
+  let cardTops = new Float32Array(n);
+  let cardHeight = 480;
+  let stackTop = 0;
+  let isMobile = false;
+  let stickyTop = 96;
+
+  // Measure once on load/resize - ZERO getBoundingClientRect() during scroll
+  const measure = () => {
+    isMobile = window.innerWidth <= 700;
+    stickyTop = isMobile ? 84 : 96;
+    const stackRect = stack.getBoundingClientRect();
+    stackTop = stackRect.top + (window.scrollY || window.pageYOffset);
+
+    for (let i = 0; i < n; i++) {
+      cardTops[i] = stackTop + cards[i].offsetTop;
+    }
+    const firstMedia = cards[0].querySelector('.exp-card-media');
+    if (firstMedia) {
+      cardHeight = firstMedia.offsetHeight || 480;
+    }
+  };
+
+  measure();
+  window.addEventListener('resize', measure, { passive: true });
+  window.addEventListener('load', measure, { passive: true });
+  setTimeout(measure, 500);
+
   let ticking = false;
 
   const update = () => {
-    const isMobile = window.innerWidth <= 700;
-    const stickyTop = isMobile ? 84 : 96;
-    const n = cards.length;
-    
-    // Single batch read of getBoundingClientRect() to avoid layout thrashing
-    const rects = new Array(n);
-    for (let i = 0; i < n; i++) {
-      rects[i] = cards[i].getBoundingClientRect();
-    }
+    const scrollY = window.scrollY || window.pageYOffset;
 
-    // Mathematical compression computation
     for (let i = 0; i < n; i++) {
       const media = cards[i].querySelector('.exp-card-media');
       if (!media) continue;
       const dim = cards[i].querySelector('.exp-card-dim');
 
-      // The topmost / last card never scales down
+      // Topmost / last card never scales
       if (i === n - 1) {
         media.style.transform = 'translate3d(0, 0, 0) scale(1)';
         if (dim) dim.style.opacity = '0';
+        cards[i].style.visibility = 'visible';
         continue;
       }
 
-      const cardHeight = rects[i].height || 480;
-      let compression = 0;
+      // Check next card's position relative to viewport
+      const nextCardTop = cardTops[i + 1] - scrollY;
 
-      for (let j = i + 1; j < n; j++) {
-        const nextTop = rects[j].top;
-        if (nextTop >= stickyTop + cardHeight) {
-          // Cards further down haven't reached card i yet
-          break;
-        }
-        const factor = Math.max(0, Math.min(1, (stickyTop + cardHeight - nextTop) / cardHeight));
-        compression += factor;
-      }
-
-      if (compression === 0) {
+      if (nextCardTop >= stickyTop + cardHeight) {
+        // Next card is below card i
         media.style.transform = 'translate3d(0, 0, 0) scale(1)';
         if (dim) dim.style.opacity = '0';
+        cards[i].style.visibility = 'visible';
+      } else if (nextCardTop <= stickyTop) {
+        // Next card has reached or passed sticky top
+        media.style.transform = 'translate3d(0, 0, 0) scale(0.95)';
+        if (dim) dim.style.opacity = '0.35';
+
+        // Occlusion culling: hide cards 2+ layers deep so GPU does not waste texture memory
+        if (i + 2 < n && (cardTops[i + 2] - scrollY) <= stickyTop + 30) {
+          cards[i].style.visibility = 'hidden';
+        } else {
+          cards[i].style.visibility = 'visible';
+        }
       } else {
-        const effectiveComp = Math.min(compression, 2.8);
-        const scale = 1 - (effectiveComp * 0.038);
-        const dimOpacity = Math.min(0.38, effectiveComp * 0.12);
+        // Next card is actively scrolling over card i
+        const p = (stickyTop + cardHeight - nextCardTop) / cardHeight;
+        const scale = 1 - (p * 0.045);
+        const dimOpacity = p * 0.35;
 
         media.style.transform = `translate3d(0, 0, 0) scale(${scale.toFixed(4)})`;
         if (dim) dim.style.opacity = dimOpacity.toFixed(3);
+        cards[i].style.visibility = 'visible';
       }
     }
 
@@ -405,9 +431,6 @@ function initStickyCards() {
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { requestAnimationFrame(update); }, { passive: true });
-  
-  // Initial calculation
   requestAnimationFrame(update);
 }
 
