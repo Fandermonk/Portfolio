@@ -143,7 +143,7 @@ body.hero-animated .hero-editorial-title .line-mask:nth-child(2) .line-inner {
 /* Hero Bottom & Scroll Prompt */
 .hero-bottom {
   margin: 0;
-  padding-bottom: clamp(75px, 11vh, 110px);
+  padding-bottom: clamp(120px, 16vh, 175px);
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -246,7 +246,7 @@ body.hero-animated .hero-bottom {
     border-radius: 10px;
   }
   .hero-bottom {
-    padding-bottom: clamp(55px, 8.5vh, 80px);
+    padding-bottom: clamp(90px, 13vh, 125px);
     justify-content: flex-end;
   }
 }
