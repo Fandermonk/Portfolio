@@ -28,7 +28,9 @@ const visualExplorations=[
   {num:'09 / 09',category:'Productivity · Daily Planner',title:'Mindful Daily Planner & Focus Notes',desc:'Minimalist editorial-style productivity planner combining daily focus blocks, habit trackers, and reflective journaling.',image:'UI:UX DESIGN PROJECTS/Images/Random Designs/cal.png'}
 ];
 const projectGrid=document.querySelector('#projects');
-projectGrid.innerHTML=projects.map((p,i)=>{const tags=p.kind.split(' · ').slice(0,3);return `<a href="${p.url}" class="project project--${p.id}" style="--project-color:${p.color}" aria-label="View ${p.title} case study" data-id="${p.id}"><div class="project-image"><div class="project-topline">${tags.map(tag=>`<span>${tag}</span>`).join('')}</div><img src="${img(p.image)}" alt="${p.title} project visual" loading="${i>1?'lazy':'eager'}"><div class="project-shade"></div><div class="project-meta"><p>0${i+1} / ${p.tag}</p><h3>${p.title} <b class="project-arrow-circle" aria-hidden="true"><svg class="arrow-svg" width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5"/><path d="M4 2.5h7.5V10"/></svg></b></h3></div></div></a>`}).join('');
+if(projectGrid){
+  projectGrid.innerHTML=projects.map((p,i)=>{const tags=p.kind.split(' · ').slice(0,3);return `<a href="${p.url}" class="project project--${p.id}" style="--project-color:${p.color}" aria-label="View ${p.title} case study" data-id="${p.id}"><div class="project-image"><div class="project-topline">${tags.map(tag=>`<span>${tag}</span>`).join('')}</div><img src="${img(p.image)}" alt="${p.title} project visual" loading="${i>1?'lazy':'eager'}"><div class="project-shade"></div><div class="project-meta"><p>0${i+1} / ${p.tag}</p><h3>${p.title} <b class="project-arrow-circle" aria-hidden="true"><svg class="arrow-svg" width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5"/><path d="M4 2.5h7.5V10"/></svg></b></h3></div></div></a>`}).join('');
+}
 const expStack=document.querySelector('#experiments-stack');
 if(expStack){expStack.innerHTML=visualExplorations.map((exp,idx)=>`<article class="exp-card" data-index="${idx}" style="z-index:${idx+1}" tabindex="0" role="button" aria-label="View ${exp.title}"><div class="exp-card-media"><img src="${img(exp.image)}" alt="${exp.title}" loading="${idx>1?'lazy':'eager'}"><div class="exp-card-shade"></div><div class="exp-card-dim" aria-hidden="true"></div><div class="exp-card-topline"><div class="exp-card-meta-left"><span class="exp-pill">${exp.num}</span><span class="exp-pill">${exp.category}</span></div><div class="exp-card-action"><span>Expand Preview</span><span class="exp-card-arrow" aria-hidden="true"><svg class="arrow-svg" width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5"/><path d="M4 2.5h7.5V10"/></svg></span></div></div><div class="exp-card-bottomline"><h3 class="exp-card-title">${exp.title}</h3><p class="exp-card-desc">${exp.desc}</p></div></div></article>`).join('');}
 const dialog=document.querySelector('#case-study'), content=document.querySelector('#case-content');
@@ -92,18 +94,6 @@ if(expLightbox){
   });
 }
 
-if(expStack){
-  expStack.addEventListener('click',e=>{
-    const card=e.target.closest('.exp-card');
-    if(card&&card.dataset.index!==undefined){openExpLightbox(parseInt(card.dataset.index,10));}
-  });
-  expStack.addEventListener('keydown',e=>{
-    if((e.key==='Enter'||e.key===' ')&&e.target.closest('.exp-card')){
-      e.preventDefault();
-      openExpLightbox(parseInt(e.target.closest('.exp-card').dataset.index,10));
-    }
-  });
-}
 
 
 
@@ -115,8 +105,6 @@ const HERO_MOON_HTML = `<span class="hero-moon-wrap"><svg class="hero-moon-svg" 
 let currentHeroIconMode = null;
 
 function updateIndiaTime(){
-  const timeVal = document.querySelector('#hero-time-val') || document.querySelector('#nav-time-val');
-  if(!timeVal) return;
   const now = new Date();
   
   // Format current India Time: e.g. "5:18 PM India"
@@ -126,7 +114,11 @@ function updateIndiaTime(){
     minute: '2-digit',
     hour12: true
   });
-  timeVal.textContent = `${timeFormatter.format(now)} India`;
+  const formattedTime = `${timeFormatter.format(now)} India`;
+
+  document.querySelectorAll('.hero-time-val, #hero-time-val, #nav-time-val, .footer-time-val').forEach(el => {
+    el.textContent = formattedTime;
+  });
   
   // After 6pm (>= 18:00) until 5am (< 05:00) IST: Moon
   // After 5am (>= 05:00) until 6pm (< 18:00) IST: Sun
@@ -147,17 +139,16 @@ function updateIndiaTime(){
     targetMode = (indiaHour >= 18 || indiaHour < 5) ? 'moon' : 'sun';
   }
   
-  // Swap icon and update animation classes
+  // Swap icon and update animation classes across all time widgets (hero + footer)
   if (currentHeroIconMode !== targetMode) {
-    const iconContainer = document.querySelector('#hero-time-icon') || document.querySelector('.hero-time-icon');
-    if (iconContainer) {
+    document.querySelectorAll('.hero-time-icon, #hero-time-icon').forEach(iconContainer => {
       iconContainer.classList.remove('is-sun', 'is-moon');
       iconContainer.classList.add(targetMode === 'moon' ? 'is-moon' : 'is-sun');
       iconContainer.style.webkitAnimation = '';
       iconContainer.style.animation = '';
       iconContainer.innerHTML = targetMode === 'moon' ? HERO_MOON_HTML : HERO_SUN_SVG;
-      currentHeroIconMode = targetMode;
-    }
+    });
+    currentHeroIconMode = targetMode;
   }
 }
 updateIndiaTime();
@@ -172,12 +163,14 @@ function initToolsMarquee() {
   const tracks = document.querySelectorAll('.tools-track');
   tracks.forEach(track => {
     if (track.dataset.duplicated === 'true') return;
-    const items = Array.from(track.children);
-    items.forEach(item => {
-      const clone = item.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      track.appendChild(clone);
-    });
+    const baseGroup = track.querySelector('.tools-group');
+    if (baseGroup) {
+      while (track.children.length < 10) {
+        const clone = baseGroup.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      }
+    }
     track.dataset.duplicated = 'true';
   });
 }
@@ -202,6 +195,105 @@ function initHeroEntrance() {
   } else {
     setTimeout(trigger, 300);
   }
+}
+
+// 2b. Hero Multilingual Greeting Typer with Insert Text Cursor
+function initHeroGreetingTyper() {
+  const greetingEl = document.getElementById('hero-greeting');
+  const cursorEl = document.getElementById('hero-cursor');
+  if (!greetingEl || !cursorEl) return;
+
+  // Don't animate if user prefers reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Multilingual greetings starting with English "Hello"
+  const greetings = [
+    'Hello',      // English
+    'Hola',       // Spanish
+    'नमस्ते',      // Hindi
+    '你好',        // Chinese
+    'Olá',        // Portuguese
+    'สวัสดี',     // Thai
+    'Bonjour',    // French
+    'Ciao',       // Italian
+    'こんにちは', // Japanese
+    'Hallo'       // German
+  ];
+
+  // Segment graphemes accurately (handling Hindi conjuncts, Thai vowels, etc.)
+  const segmenter = typeof Intl !== 'undefined' && Intl.Segmenter
+    ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+    : null;
+
+  const getGraphemes = (word) => {
+    if (segmenter) {
+      return Array.from(segmenter.segment(word), s => s.segment);
+    }
+    return Array.from(word);
+  };
+
+  let wordIndex = 0;
+  let isDeleting = true; // starts as true because Hello is already displayed in HTML
+  let currentGraphemes = getGraphemes(greetings[0]);
+  let charIndex = currentGraphemes.length; // 5 ('Hello')
+  let timerId = null;
+
+  const TYPING_SPEED = 100;    // ms per character typed
+  const DELETING_SPEED = 50;   // ms per character deleted (crisp backspace)
+  const PAUSE_TYPED = 2400;    // ms pause when greeting is fully typed
+  const PAUSE_EMPTY = 320;     // ms pause when greeting is cleared before typing next
+
+  function tick() {
+    const targetWord = greetings[wordIndex];
+    const targetGraphemes = getGraphemes(targetWord);
+
+    if (isDeleting) {
+      cursorEl.classList.add('is-typing');
+      charIndex--;
+      greetingEl.textContent = targetGraphemes.slice(0, charIndex).join('');
+
+      if (charIndex <= 0) {
+        charIndex = 0;
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % greetings.length;
+        cursorEl.classList.remove('is-typing');
+        timerId = setTimeout(tick, PAUSE_EMPTY);
+        return;
+      }
+      timerId = setTimeout(tick, DELETING_SPEED);
+    } else {
+      cursorEl.classList.add('is-typing');
+      charIndex++;
+      greetingEl.textContent = targetGraphemes.slice(0, charIndex).join('');
+
+      if (charIndex >= targetGraphemes.length) {
+        charIndex = targetGraphemes.length;
+        isDeleting = true;
+        cursorEl.classList.remove('is-typing');
+        timerId = setTimeout(tick, PAUSE_TYPED);
+        return;
+      }
+      timerId = setTimeout(tick, TYPING_SPEED);
+    }
+  }
+
+  // Pause when tab is inactive to avoid desync & conserve battery
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (timerId) clearTimeout(timerId);
+    } else {
+      cursorEl.classList.remove('is-typing');
+      timerId = setTimeout(tick, 1000);
+    }
+  });
+
+  // Start backspacing after initial hero reveal has settled
+  setTimeout(() => {
+    cursorEl.classList.remove('is-typing');
+    timerId = setTimeout(tick, PAUSE_TYPED);
+  }, 2400);
 }
 
 // 3. Scroll-Triggered Text, Paragraph & Card Animations (IntersectionObserver)
@@ -334,113 +426,223 @@ function initHeroParallax() {
   onScroll();
 }
 
-// 6. Visual Explorations — Ultra-Smooth Sticky Stacking (Zero Forced Reflows, Occlusion Culled)
-function initStickyCards() {
-  const stack = document.querySelector('#experiments-stack');
-  const cards = document.querySelectorAll('.exp-card');
-  if (!stack || !cards.length) return;
+// 6. Visual Explorations — Swipe Left/Right Carousel with Drag, Snap, & Arrow Controls
+function initExplorationsCarousel() {
+  const track = document.querySelector('#experiments-stack');
+  if (!track) return;
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
+  const prevBtn = document.querySelector('#exp-prev-btn');
+  const nextBtn = document.querySelector('#exp-next-btn');
+  const counter = document.querySelector('#exp-carousel-counter');
+  const cards = track.querySelectorAll('.exp-card');
+  const totalCards = cards.length;
+  if (!totalCards) return;
 
-  const n = cards.length;
-  let cardTops = new Float32Array(n);
-  let cardHeight = 480;
-  let stackTop = 0;
-  let isMobile = false;
-  let stickyTop = 96;
+  let activeIdx = 0;
+  let isPointerDown = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let hasDragged = false;
+  const dragThreshold = 6;
 
-  // Measure once on load/resize - ZERO getBoundingClientRect() during scroll
-  const measure = () => {
-    isMobile = window.innerWidth <= 700;
-    stickyTop = isMobile ? 84 : 96;
-    const stackRect = stack.getBoundingClientRect();
-    stackTop = stackRect.top + (window.scrollY || window.pageYOffset);
+  // Update counter and disabled state of nav buttons based on current scroll
+  const updateControls = () => {
+    const scrollLeft = track.scrollLeft;
+    const maxScroll = track.scrollWidth - track.clientWidth;
 
-    for (let i = 0; i < n; i++) {
-      cardTops[i] = stackTop + cards[i].offsetTop;
+    // Find card closest to viewport start
+    let closestIdx = 0;
+    let minDiff = Infinity;
+    cards.forEach((card, idx) => {
+      const diff = Math.abs(card.offsetLeft - track.offsetLeft - scrollLeft);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = idx;
+      }
+    });
+
+    activeIdx = closestIdx;
+    if (counter) {
+      counter.textContent = `${String(activeIdx + 1).padStart(2, '0')} / ${String(totalCards).padStart(2, '0')}`;
     }
-    const firstMedia = cards[0].querySelector('.exp-card-media');
-    if (firstMedia) {
-      cardHeight = firstMedia.offsetHeight || 480;
+
+    if (prevBtn) {
+      prevBtn.disabled = scrollLeft <= 10;
+      prevBtn.classList.toggle('is-disabled', scrollLeft <= 10);
+    }
+    if (nextBtn) {
+      nextBtn.disabled = scrollLeft >= maxScroll - 10;
+      nextBtn.classList.toggle('is-disabled', scrollLeft >= maxScroll - 10);
     }
   };
 
-  measure();
-  window.addEventListener('resize', measure, { passive: true });
-  window.addEventListener('load', measure, { passive: true });
-  setTimeout(measure, 500);
+  let scrollTicking = false;
+  track.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        updateControls();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }, { passive: true });
 
-  let ticking = false;
+  // Scroll to a specific card index
+  const scrollToCard = (idx) => {
+    const targetIdx = Math.max(0, Math.min(totalCards - 1, idx));
+    const targetCard = cards[targetIdx];
+    if (!targetCard) return;
 
-  const update = () => {
-    const scrollY = window.scrollY || window.pageYOffset;
+    const targetOffset = targetCard.offsetLeft - track.offsetLeft;
+    track.scrollTo({
+      left: targetOffset,
+      behavior: 'smooth'
+    });
+  };
 
-    for (let i = 0; i < n; i++) {
-      const media = cards[i].querySelector('.exp-card-media');
-      if (!media) continue;
-      const dim = cards[i].querySelector('.exp-card-dim');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToCard(activeIdx - 1);
+    });
+  }
 
-      // Topmost / last card never scales
-      if (i === n - 1) {
-        media.style.transform = 'translate3d(0, 0, 0) scale(1)';
-        if (dim) dim.style.opacity = '0';
-        cards[i].style.visibility = 'visible';
-        continue;
-      }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToCard(activeIdx + 1);
+    });
+  }
 
-      // Check next card's position relative to viewport
-      const nextCardTop = cardTops[i + 1] - scrollY;
+  // Pointer drag to scroll for desktop & touch
+  track.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    isPointerDown = true;
+    startX = e.pageX;
+    startScrollLeft = track.scrollLeft;
+    hasDragged = false;
+  });
 
-      if (nextCardTop >= stickyTop + cardHeight) {
-        // Next card is below card i
-        media.style.transform = 'translate3d(0, 0, 0) scale(1)';
-        if (dim) dim.style.opacity = '0';
-        cards[i].style.visibility = 'visible';
-      } else if (nextCardTop <= stickyTop) {
-        // Next card has reached or passed sticky top
-        media.style.transform = 'translate3d(0, 0, 0) scale(0.95)';
-        if (dim) dim.style.opacity = '0.35';
+  window.addEventListener('pointermove', (e) => {
+    if (!isPointerDown) return;
+    const dx = e.pageX - startX;
+    if (Math.abs(dx) > dragThreshold) {
+      hasDragged = true;
+      track.classList.add('is-dragging');
+    }
+    if (hasDragged) {
+      track.scrollLeft = startScrollLeft - dx;
+    }
+  });
 
-        // Occlusion culling: hide cards 2+ layers deep so GPU does not waste texture memory
-        if (i + 2 < n && (cardTops[i + 2] - scrollY) <= stickyTop + 30) {
-          cards[i].style.visibility = 'hidden';
-        } else {
-          cards[i].style.visibility = 'visible';
-        }
+  const endDrag = () => {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    track.classList.remove('is-dragging');
+    setTimeout(() => {
+      hasDragged = false;
+    }, 60);
+  };
+
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  // Click on card: open lightbox ONLY if the user was NOT dragging
+  track.addEventListener('click', (e) => {
+    if (hasDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    const card = e.target.closest('.exp-card');
+    if (card && card.dataset.index !== undefined) {
+      openExpLightbox(parseInt(card.dataset.index, 10));
+    }
+  });
+
+  // Keyboard navigation on track
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      scrollToCard(activeIdx - 1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      scrollToCard(activeIdx + 1);
+    } else if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.exp-card')) {
+      e.preventDefault();
+      const card = e.target.closest('.exp-card');
+      openExpLightbox(parseInt(card.dataset.index, 10));
+    }
+  });
+
+  window.addEventListener('resize', updateControls, { passive: true });
+  updateControls();
+}
+
+// Mobile Fullscreen Menu Toggle (Midu-style)
+function initMobileMenu() {
+  function openMenu() {
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const menuBtn = document.querySelector('.nav-menu-btn');
+    document.body.classList.add('mobile-menu-open');
+    if (overlay) overlay.classList.add('is-open');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const menuBtn = document.querySelector('.nav-menu-btn');
+    document.body.classList.remove('mobile-menu-open');
+    if (overlay) overlay.classList.remove('is-open');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Use document-level delegated listener for instant touch/click responsiveness
+  document.addEventListener('click', (e) => {
+    const menuBtn = e.target.closest('.nav-menu-btn');
+    if (menuBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (document.body.classList.contains('mobile-menu-open')) {
+        closeMenu();
       } else {
-        // Next card is actively scrolling over card i
-        const p = (stickyTop + cardHeight - nextCardTop) / cardHeight;
-        const scale = 1 - (p * 0.045);
-        const dimOpacity = p * 0.35;
-
-        media.style.transform = `translate3d(0, 0, 0) scale(${scale.toFixed(4)})`;
-        if (dim) dim.style.opacity = dimOpacity.toFixed(3);
-        cards[i].style.visibility = 'visible';
+        openMenu();
       }
+      return;
     }
 
-    ticking = false;
-  };
-
-  const onScroll = () => {
-    if (!ticking) {
-      requestAnimationFrame(update);
-      ticking = true;
+    const closeBtn = e.target.closest('.mobile-menu-close-btn');
+    if (closeBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMenu();
+      return;
     }
-  };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  requestAnimationFrame(update);
+    // Close when clicking any link inside the mobile menu
+    const menuLink = e.target.closest('.mobile-menu-overlay a');
+    if (menuLink) {
+      closeMenu();
+    }
+  });
+
+  // Close on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('mobile-menu-open')) {
+      closeMenu();
+    }
+  });
 }
 
 // Run initializers
 initToolsMarquee();
 initHeroEntrance();
+initHeroGreetingTyper();
 initScrollAnimations();
 initNavScroll();
 initHeroParallax();
-initStickyCards();
+initExplorationsCarousel();
+initMobileMenu();
 
 
 

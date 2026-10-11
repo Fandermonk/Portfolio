@@ -12,8 +12,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=56" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;500&family=Noto+Serif+SC:wght@400;500&family=Noto+Serif+Thai:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=81" />
 
     <!-- Vercel Web Analytics -->
     <script>
@@ -38,6 +38,15 @@
         <a class="wordmark" href="#top">Arjun.</a>
       </div>
       <div class="nav-right">
+        <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false">
+          <svg class="nav-menu-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="4.5" height="4.5" rx="1"/>
+            <rect x="9.5" y="2" width="4.5" height="4.5" rx="1"/>
+            <rect x="2" y="9.5" width="4.5" height="4.5" rx="1"/>
+            <rect x="9.5" y="9.5" width="4.5" height="4.5" rx="1"/>
+          </svg>
+          <span>Menu</span>
+        </button>
         <a class="nav-contact" href="mailto:arjunrajeev.ar@gmail.com"><span class="btn-star-wrap"><svg class="btn-star" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M 11.762 5.697 L 10.043 5.205 C 8.469 4.762 7.238 3.531 6.795 1.958 L 6.302 0.238 C 6.252 0.115 6.132 0.035 5.999 0.035 C 5.866 0.035 5.747 0.115 5.696 0.238 L 5.205 1.958 C 4.762 3.531 3.531 4.762 1.958 5.205 L 0.238 5.697 C 0.102 5.735 0.009 5.859 0.009 6 C 0.009 6.141 0.102 6.265 0.238 6.303 L 1.957 6.794 C 3.531 7.238 4.761 8.468 5.204 10.042 L 5.696 11.762 C 5.735 11.897 5.858 11.99 5.999 11.99 C 6.14 11.99 6.264 11.897 6.302 11.762 L 6.794 10.043 C 7.237 8.469 8.467 7.238 10.041 6.795 L 11.761 6.303 C 11.896 6.265 11.99 6.141 11.99 6 C 11.99 5.859 11.896 5.735 11.761 5.697 Z"/></svg></span><span class="btn-text">Let’s talk</span></a>
       </div>
     </header>
@@ -66,7 +75,7 @@
         <h1 class="hero-editorial-title">
           <span class="line-mask">
             <span class="line-inner hero-line">
-              Hey, I’m
+              <span class="hero-intro-phrase"><span class="hero-greeting-text" id="hero-greeting">Hello</span><span class="hero-cursor" id="hero-cursor" aria-hidden="true"></span>, I’m</span>
               <a href="about.html" class="hero-badge-wrap" aria-label="About Arjun Rajeev">
                 <span class="hero-badge hero-badge--avatar">
                   <img src="assets/images/arjun-badge.jpg?v=2" alt="Arjun Rajeev" />
@@ -99,77 +108,276 @@
       </section>
 
       <section id="explorations" class="lab wrap" aria-labelledby="lab-head">
-        <div class="section-head" id="lab-head"><p><strong>Visual explorations</strong> — interface studies & spatial concepts.</p></div>
-        <div id="experiments-stack" class="experiments-stack"></div>
+        <div class="section-head exp-section-head" id="lab-head">
+          <p><strong>Visual explorations</strong> — interface studies & spatial concepts.</p>
+          <div class="exp-controls" aria-label="Explorations carousel controls">
+            <span class="exp-counter" id="exp-carousel-counter" aria-live="polite">01 / 09</span>
+            <div class="exp-nav-btns">
+              <button class="exp-nav-btn exp-nav-btn--prev" id="exp-prev-btn" aria-label="Previous exploration">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <button class="exp-nav-btn exp-nav-btn--next" id="exp-next-btn" aria-label="Next exploration">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="exp-carousel-wrapper">
+          <div id="experiments-stack" class="experiments-track" role="region" aria-label="Visual explorations swipe carousel" tabindex="0"></div>
+        </div>
       </section>
 
-      <section class="tools wrap" aria-labelledby="tools-title">
-        <h2 id="tools-title">Tools for every<br /><em>part of the story.</em></h2>
-        <div class="tools-marquee" aria-label="Design, marketing and creative tools">
+            <section class="tools" aria-labelledby="tools-title">
+        <div class="tools-header wrap">
+          <h2 id="tools-title">Tools for every<br /><em>part of the story.</em></h2>
+        </div>
+                <div class="tools-marquee" aria-label="Design, marketing and creative tools">
           <div class="tools-row tools-row--1">
             <div class="tools-track">
-              <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
-              <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
-              <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
-              <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
-              <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
-              <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
-              <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
-              <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
-              <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              <div class="tools-group">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Figma"><img src="assets/icons/figma.svg" alt="Figma" /><span>Figma</span></div>
+                <div class="tool" aria-label="Framer"><img src="assets/icons/framer.svg" alt="Framer" /><span>Framer</span></div>
+                <div class="tool" aria-label="Photoshop"><img src="assets/icons/photoshop.svg" alt="Photoshop" /><span>Photoshop</span></div>
+                <div class="tool" aria-label="Illustrator"><img src="assets/icons/illustrator.svg" alt="Illustrator" /><span>Illustrator</span></div>
+                <div class="tool" aria-label="InDesign"><img src="assets/icons/indesign.svg" alt="InDesign" /><span>InDesign</span></div>
+                <div class="tool" aria-label="After Effects"><img src="assets/icons/aftereffects.svg" alt="After Effects" /><span>After Effects</span></div>
+                <div class="tool" aria-label="Premiere Pro"><img src="assets/icons/premierepro.svg" alt="Premiere Pro" /><span>Premiere Pro</span></div>
+                <div class="tool" aria-label="DaVinci Resolve"><img src="assets/icons/davinciresolve.svg" alt="DaVinci Resolve" /><span>DaVinci Resolve</span></div>
+                <div class="tool" aria-label="Blender"><img src="assets/icons/blender.svg" alt="Blender" /><span>Blender</span></div>
+              </div>
             </div>
           </div>
           <div class="tools-row tools-row--2">
             <div class="tools-track">
-              <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
-              <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
-              <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
-              <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
-              <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
-              <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
-              <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
-              <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
-              <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              <div class="tools-group">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
+              <div class="tools-group" aria-hidden="true">
+                <div class="tool" aria-label="Canva"><img src="assets/icons/canva.svg" alt="Canva" /><span>Canva</span></div>
+                <div class="tool" aria-label="Webflow"><img src="assets/icons/webflow.svg" alt="Webflow" /><span>Webflow</span></div>
+                <div class="tool" aria-label="Google Ads"><img src="assets/icons/googleads.svg" alt="Google Ads" /><span>Google Ads</span></div>
+                <div class="tool" aria-label="Google Analytics"><img src="assets/icons/googleanalytics.svg" alt="Google Analytics" /><span>Google Analytics</span></div>
+                <div class="tool" aria-label="Meta Ads"><img src="assets/icons/meta.svg" alt="Meta Ads" /><span>Meta Ads</span></div>
+                <div class="tool" aria-label="LinkedIn Ads"><img src="assets/icons/linkedin.svg" alt="LinkedIn Ads" /><span>LinkedIn Ads</span></div>
+                <div class="tool" aria-label="Mailchimp"><img src="assets/icons/mailchimp.svg" alt="Mailchimp" /><span>Mailchimp</span></div>
+                <div class="tool" aria-label="HubSpot"><img src="assets/icons/hubspot.svg" alt="HubSpot" /><span>HubSpot</span></div>
+                <div class="tool" aria-label="Notion"><img src="assets/icons/notion.svg" alt="Notion" /><span>Notion</span></div>
+              </div>
             </div>
           </div>
         </div>
-        <p class="tools-note"><strong>From audience insight and campaign performance</strong> to a polished final frame — the tools change, but the thinking stays connected.</p>
+        <div class="tools-footer wrap">
+          <p class="tools-note"><strong>From audience insight and campaign performance</strong> to a polished final frame — the tools change, but the thinking stays connected.</p>
+        </div>
       </section>
 
-      <section id="contact" class="contact wrap">
-        <h2 class="masked-heading">
-          <span class="line-mask"><span class="line-inner">Let’s make something</span></span>
-          <span class="line-mask"><span class="line-inner"><em>worth noticing.</em></span></span>
-        </h2>
-        <a class="contact-button" href="mailto:arjunrajeev.ar@gmail.com"><span class="btn-star-wrap"><svg class="btn-star" width="13" height="13" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M 11.762 5.697 L 10.043 5.205 C 8.469 4.762 7.238 3.531 6.795 1.958 L 6.302 0.238 C 6.252 0.115 6.132 0.035 5.999 0.035 C 5.866 0.035 5.747 0.115 5.696 0.238 L 5.205 1.958 C 4.762 3.531 3.531 4.762 1.958 5.205 L 0.238 5.697 C 0.102 5.735 0.009 5.859 0.009 6 C 0.009 6.141 0.102 6.265 0.238 6.303 L 1.957 6.794 C 3.531 7.238 4.761 8.468 5.204 10.042 L 5.696 11.762 C 5.735 11.897 5.858 11.99 5.999 11.99 C 6.14 11.99 6.264 11.897 6.302 11.762 L 6.794 10.043 C 7.237 8.469 8.467 7.238 10.041 6.795 L 11.761 6.303 C 11.896 6.265 11.99 6.141 11.99 6 C 11.99 5.859 11.896 5.735 11.761 5.697 Z"/></svg></span><span class="btn-text">Start a conversation</span></a>
-      </section>
       </div>
     </main>
-    <footer class="wrap">
-      <span>© 2026 Arjun Rajeev</span>
-      <div class="footer-socials" aria-label="Social profiles and email">
-        <a class="footer-icon" href="https://www.linkedin.com/in/arjunrajeev17/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="LinkedIn">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect width="4" height="12" x="2" y="9"/>
-            <circle cx="4" cy="4" r="2"/>
-          </svg>
-        </a>
-        <a class="footer-icon" href="https://www.instagram.com/arjunrajeevl/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile" title="Instagram">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-          </svg>
-        </a>
-        <a class="footer-icon" href="mailto:arjunrajeev.ar@gmail.com" aria-label="Send email to arjunrajeev.ar@gmail.com" title="Email">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect width="20" height="16" x="2" y="4" rx="2"/>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-        </a>
+    <footer class="site-footer" id="contact">
+      <div class="footer-inner wrap">
+        <!-- Left Side: Time, Headline, CTA & Copyright -->
+        <div class="footer-left">
+          <div class="hero-time footer-hero-time" aria-label="Current time in India">
+            <span class="hero-time-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="8" r="2.8" fill="currentColor" stroke="none"/>
+                <line x1="8" y1="1.2" x2="8" y2="2.8"/>
+                <line x1="8" y1="13.2" x2="8" y2="14.8"/>
+                <line x1="1.2" y1="8" x2="2.8" y2="8"/>
+                <line x1="13.2" y1="8" x2="14.8" y2="8"/>
+                <line x1="3.2" y1="3.2" x2="4.4" y2="4.4"/>
+                <line x1="11.6" y1="11.6" x2="12.8" y2="12.8"/>
+                <line x1="3.2" y1="12.8" x2="4.4" y2="11.6"/>
+                <line x1="11.6" y1="4.4" x2="12.8" y2="3.2"/>
+              </svg>
+            </span>
+            <span class="hero-time-val">--:-- India</span>
+          </div>
+
+          <h3 class="footer-statement">
+            <span class="footer-line">Reach out and I’ll help you make it </span><br class="footer-br" /><span class="footer-line">with clarity and purpose.</span>
+          </h3>
+
+          <div class="footer-cta-wrap">
+            <a class="footer-cta-btn" href="mailto:arjunrajeev.ar@gmail.com"><span class="btn-star-wrap"><svg class="btn-star" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M 11.762 5.697 L 10.043 5.205 C 8.469 4.762 7.238 3.531 6.795 1.958 L 6.302 0.238 C 6.252 0.115 6.132 0.035 5.999 0.035 C 5.866 0.035 5.747 0.115 5.696 0.238 L 5.205 1.958 C 4.762 3.531 3.531 4.762 1.958 5.205 L 0.238 5.697 C 0.102 5.735 0.009 5.859 0.009 6 C 0.009 6.141 0.102 6.265 0.238 6.303 L 1.957 6.794 C 3.531 7.238 4.761 8.468 5.204 10.042 L 5.696 11.762 C 5.735 11.897 5.858 11.99 5.999 11.99 C 6.14 11.99 6.264 11.897 6.302 11.762 L 6.794 10.043 C 7.237 8.469 8.467 7.238 10.041 6.795 L 11.761 6.303 C 11.896 6.265 11.99 6.141 11.99 6 C 11.99 5.859 11.896 5.735 11.761 5.697 Z"/></svg></span><span class="btn-text">Get in touch</span></a>
+          </div>
+
+          <div class="footer-copyright">
+            2026 ARJUN RAJEEV,<br />ALL RIGHTS RESERVED
+          </div>
+        </div>
+
+        <!-- Right Side: Explore & Socials Columns -->
+        <div class="footer-right">
+          <div class="footer-nav-col">
+            <span class="footer-col-label">Explore</span>
+            <ul class="footer-nav-list">
+              <li><a href="index.html#work">Work</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-nav-col">
+            <span class="footer-col-label">Socials</span>
+            <ul class="footer-nav-list">
+              <li><a href="https://www.linkedin.com/in/arjunrajeev17/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="https://www.instagram.com/arjunrajeevl/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="mailto:arjunrajeev.ar@gmail.com">Email</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <a href="#top" class="back-to-top">Back to top <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
     </footer>
     <div class="edge-blur-bottom" aria-hidden="true">
       <div class="edge-blur-layer edge-blur-layer--1"></div>
@@ -201,6 +409,59 @@
         </div>
       </div>
     </dialog>
-    <script src="script.js?v=28"></script>
+    <script src="script.js?v=40"></script>
+      <!-- Mobile Fullscreen Menu Overlay (Midu-style) -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" aria-modal="true" role="dialog">
+      <div class="mobile-menu-header">
+        <a class="mobile-menu-wordmark" href="index.html">Arjun.</a>
+        <button class="mobile-menu-close-btn" aria-label="Close menu">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+          <span>Close</span>
+        </button>
+      </div>
+
+      <div class="mobile-menu-body">
+        <div class="mobile-menu-card">
+          <ul class="mobile-menu-links">
+            <li class="mobile-menu-item">
+              <a class="mobile-menu-link" href="index.html">
+                <span class="mobile-menu-link-title">Home</span>
+                <span class="mobile-menu-thumb"><img src="assets/images/craft-badge.png" alt="Home badge" loading="lazy" /></span>
+              </a>
+            </li>
+            <li class="mobile-menu-item">
+              <a class="mobile-menu-link" href="index.html#work">
+                <span class="mobile-menu-link-title">Work</span>
+                <span class="mobile-menu-thumb"><img src="assets/menu/detox_thumb.jpg" alt="Work preview" loading="lazy" /></span>
+              </a>
+            </li>
+            <li class="mobile-menu-item">
+              <a class="mobile-menu-link" href="about.html">
+                <span class="mobile-menu-link-title">About</span>
+                <span class="mobile-menu-thumb"><img src="assets/images/arjun-badge.jpg" alt="About Arjun" loading="lazy" /></span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="mobile-menu-footer-block">
+            <div class="mobile-menu-socials">
+              <span class="mobile-menu-socials-label">Social media</span>
+              <a href="https://www.linkedin.com/in/arjunrajeev17/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.instagram.com/arjunrajeevl/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="mailto:arjunrajeev.ar@gmail.com">Email</a>
+            </div>
+
+            <a class="mobile-menu-cta" href="mailto:arjunrajeev.ar@gmail.com">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+                <path d="M 11.762 5.697 L 10.043 5.205 C 8.469 4.762 7.238 3.531 6.795 1.958 L 6.302 0.238 C 6.252 0.115 6.132 0.035 5.999 0.035 C 5.866 0.035 5.747 0.115 5.696 0.238 L 5.205 1.958 C 4.762 3.531 3.531 4.762 1.958 5.205 L 0.238 5.697 C 0.102 5.735 0.009 5.859 0.009 6 C 0.009 6.141 0.102 6.265 0.238 6.303 L 1.957 6.794 C 3.531 7.238 4.761 8.468 5.204 10.042 L 5.696 11.762 C 5.735 11.897 5.858 11.99 5.999 11.99 C 6.14 11.99 6.264 11.897 6.302 11.762 L 6.794 10.043 C 7.237 8.469 8.467 7.238 10.041 6.795 L 11.761 6.303 C 11.896 6.265 11.99 6.141 11.99 6 C 11.99 5.859 11.896 5.735 11.761 5.697 Z"/>
+              </svg>
+              <span>Get in touch</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
