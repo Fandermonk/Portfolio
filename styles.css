@@ -741,33 +741,41 @@ body.hero-animated .hero-bottom {
 .exp-card-action {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: 999px;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
   background: rgba(16, 16, 18, 0.78);
   color: #fff;
-  font: 11px "DM Mono", monospace;
-  text-transform: uppercase;
-  letter-spacing: .03em;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: none !important;
-  transition: background .2s, border-color .2s;
   flex-shrink: 0;
+  cursor: pointer;
+  transform: none !important;
+  transition: background .2s ease;
 }
 
+.exp-card-action svg,
 .exp-card-arrow {
-  transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+  width: 12px;
+  height: 12px;
+  transform: none !important;
+  transition: none !important;
 }
 
 .exp-card:hover .exp-card-action {
   background: rgba(255, 255, 255, 0.2);
   border-color: transparent !important;
   border: none !important;
+  transform: none !important;
 }
 
+.exp-card:hover .exp-card-action svg,
 .exp-card:hover .exp-card-arrow {
-  transform: translate(2px, -2px);
+  transform: none !important;
 }
 
 .exp-card-bottomline {
@@ -824,7 +832,7 @@ body.hero-animated .hero-bottom {
   .exp-controls{align-self:flex-start}
   .exp-card{flex:0 0 calc(100vw - 64px);max-width:520px;border-radius:32px}
   .exp-card-media{height:clamp(340px,92vw,440px);aspect-ratio:auto;border-radius:32px;border:none}
-  .exp-card-action{display:none}
+  .exp-card-action{display:inline-flex !important;width:28px !important;height:28px !important}
   .exp-card-topline{top:16px;left:16px;right:16px}
   .exp-card-bottomline{bottom:18px;left:16px;right:16px}
   .exp-card-title{font-size:1.25rem;margin-bottom:6px}
@@ -1158,7 +1166,6 @@ footer.site-footer,
 
 /* Button Vector Arrow & Trailing Arrow Nudge */
 .btn-arrow,
-.exp-card-arrow,
 .exp-card-badge-arrow {
   display: inline-flex;
   align-items: center;
@@ -1167,11 +1174,9 @@ footer.site-footer,
   will-change: transform;
 }
 .btn-arrow svg,
-.exp-card-arrow svg,
 .exp-card-badge-arrow svg {
   display: block;
 }
-.exp-card:hover .exp-card-arrow,
 .exp-card:hover .exp-card-badge-arrow {
   transform: translate3d(2px, -2px, 0);
 }
