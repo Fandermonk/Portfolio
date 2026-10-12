@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arjunrajeev.vercel.app/sitemap.xml
