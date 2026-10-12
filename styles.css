@@ -427,7 +427,7 @@ body.hero-animated .hero-bottom {
   background: #141416;
 }
 .hero-badge--avatar img {
-  object-position: 48% 25%;
+  object-position: 50% 35%;
 }
 .hero-badge--craft {
   border: 2px solid rgba(255, 255, 255, 0.22);
@@ -2176,7 +2176,7 @@ body.about-theme-white .noise {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 48% 25%;
+  object-position: 50% 35%;
   display: block;
 }
 .about-hero-title {
